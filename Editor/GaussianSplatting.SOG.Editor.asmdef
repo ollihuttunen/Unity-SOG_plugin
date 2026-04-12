@@ -1,0 +1,22 @@
+{
+    "name": "GaussianSplatting.SOG.Editor",
+    "rootNamespace": "GaussianSplatting.SOG.Editor",
+    "references": [
+        "GaussianSplatting.SOG.Runtime",
+        "GaussianSplatting",
+        "GaussianSplattingEditor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

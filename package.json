@@ -1,0 +1,21 @@
+{
+  "name": "com.ollihuttunen.sog-gaussian-splatting",
+  "version": "0.1.0",
+  "displayName": "SOG Gaussian Splatting",
+  "description": "Adds PlayCanvas SOG (Spatially Ordered Gaussians) format support to UnityGaussianSplatting. Import and render .sog files as GaussianSplatAsset with full Float32 quality.",
+  "unity": "6000.0",
+  "author": {
+    "name": "Olli Huttunen",
+    "url": "https://github.com/ollihuttunen/Unity-SOG_plugin"
+  },
+  "dependencies": {
+    "org.nesnausk.gaussian-splatting": "1.1.1",
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  },
+  "keywords": [
+    "gaussian-splatting",
+    "3dgs",
+    "sog",
+    "playcanvas"
+  ]
+}

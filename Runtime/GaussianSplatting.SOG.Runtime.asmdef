@@ -1,0 +1,18 @@
+{
+    "name": "GaussianSplatting.SOG.Runtime",
+    "rootNamespace": "GaussianSplatting.SOG",
+    "references": [
+        "GaussianSplatting"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,16 @@
+# Unity generated files
+*.meta
+
+# Native plugin binary (user must download separately)
+Plugins/x86_64/libwebp.dll
+Plugins/x86_64/libwebp.lib
+
+# Local Claude Code settings
+.claude/
+
+# Documentation files (Finnish internal docs)
+SOG_Unity_Plugin_Documentation.md
+
+# OS files
+.DS_Store
+Thumbs.db
