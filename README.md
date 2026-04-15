@@ -157,9 +157,21 @@ Unity-SOG_plugin/
 
 ## Known Limitations
 
-- **Windows x64 only** — the libwebp native plugin is currently only configured for Windows x64. macOS/Linux support requires the corresponding native libraries.
+- **Windows x64 only (primary target)** — the libwebp native plugin is configured for Windows x64. The C# code itself is fully cross-platform; only the native library needs to be swapped for other platforms.
 - **Editor import only** — true runtime `.sog` loading (without prior editor import) is not yet supported. `GaussianSplatAsset` requires `TextAsset` sub-assets that can only be created in the editor.
 - **Unity 6+ only** — uses `ScriptedImporter` and APIs from Unity 6.
+
+### macOS note
+
+The plugin has not been tested on macOS but the C# code should work as-is. If you want to try it, you need `libwebp.dylib` instead of `libwebp.dll`. The easiest way to get it is via Homebrew:
+
+```bash
+brew install webp
+# library location: /opt/homebrew/lib/libwebp.dylib  (Apple Silicon)
+#                   /usr/local/lib/libwebp.dylib      (Intel Mac)
+```
+
+Place the `.dylib` in `Plugins/macOS/` inside the package folder and configure its platform in the Unity Inspector. Contributions adding official macOS support are welcome.
 
 ---
 
