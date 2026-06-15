@@ -4,7 +4,7 @@ A Unity UPM package that adds [SOG (Spatially Ordered Gaussians)](https://develo
 
 SOG is a compressed 3D Gaussian Splatting format by PlayCanvas that achieves ~15–20× smaller file sizes compared to PLY, using WebP images and vector quantization codebooks inside a ZIP archive.
 
-![Unity SOG import result](https://img.shields.io/badge/Unity-6000.0%2B-blue) ![Status](https://img.shields.io/badge/status-working-brightgreen)
+![Unity SOG import result](https://img.shields.io/badge/Unity-2022.3%2B-blue) ![Status](https://img.shields.io/badge/status-working-brightgreen)
 
 ---
 
@@ -22,7 +22,7 @@ SOG is a compressed 3D Gaussian Splatting format by PlayCanvas that achieves ~15
 
 | Dependency | Version |
 |---|---|
-| Unity | 6000.0 (Unity 6) or newer |
+| Unity | 2022.3 or newer |
 | [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting) | latest |
 | [libwebp](https://chromium.googlesource.com/webm/libwebp) native library | 1.4.0 |
 
@@ -162,7 +162,7 @@ Unity-SOG_plugin/
 
 - **Windows x64 only (primary target)** — the libwebp native plugin is configured for Windows x64. The C# code itself is fully cross-platform; only the native library needs to be swapped for other platforms.
 - **Editor import only** — true runtime `.sog` loading (without prior editor import) is not yet supported. `GaussianSplatAsset` requires `TextAsset` sub-assets that can only be created in the editor.
-- **Unity 6+ only** — uses `ScriptedImporter` and APIs from Unity 6.
+- **Unity 2022.3+ only** — uses `ScriptedImporter` and URP Renderer Feature APIs.
 
 ### macOS note
 
