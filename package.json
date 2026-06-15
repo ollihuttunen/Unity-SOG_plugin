@@ -9,7 +9,6 @@
     "url": "https://github.com/ollihuttunen/Unity-SOG_plugin"
   },
   "dependencies": {
-    "org.nesnausk.gaussian-splatting": "1.1.1",
     "com.unity.nuget.newtonsoft-json": "3.2.1"
   },
   "keywords": [

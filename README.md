@@ -33,37 +33,24 @@ SOG is a compressed 3D Gaussian Splatting format by PlayCanvas that achieves ~15
 
 ## Installation
 
+Download both `.tgz` files from the [latest release](https://github.com/ollihuttunen/Unity-SOG_plugin/releases/latest):
+
+| File | Description |
+|---|---|
+| `org.nesnausk.gaussian-splatting-1.1.1.tgz` | Aras Pranckevičius's UnityGaussianSplatting (MIT) |
+| `com.ollihuttunen.sog-gaussian-splatting-0.1.0.tgz` | This plugin |
+
 ### Step 1 — Install UnityGaussianSplatting
 
-In Unity Package Manager → **Add package from git URL**:
+In Unity Package Manager → **`+`** → **Add package from tarball** → select `org.nesnausk.gaussian-splatting-1.1.1.tgz`.
 
-```
-https://github.com/aras-p/UnityGaussianSplatting.git
-```
+### Step 2 — Install this plugin
 
-### Step 2 — Install this package
+In Unity Package Manager → **`+`** → **Add package from tarball** → select `com.ollihuttunen.sog-gaussian-splatting-0.1.0.tgz`.
 
-In Unity Package Manager → **Add package from disk** → select `package.json` from this repository.
+> **Note:** Unity will show an "unsigned package" warning for both — this is expected for packages installed from tarball outside the Unity Registry. Click **Install** to proceed.
 
-Or add directly to your project's `Packages/manifest.json`:
-
-```json
-{
-  "dependencies": {
-    "com.ollihuttunen.sog-gaussian-splatting": "file:../path/to/Unity-SOG_plugin"
-  }
-}
-```
-
-### Step 3 — Add libwebp native library
-
-Download [libwebp 1.4.0 for Windows x64](https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.4.0-windows-x64.zip).
-
-Extract and copy `libwebp-1.4.0-windows-x64\lib\libwebp.dll` to:
-
-```
-Packages/com.ollihuttunen.sog-gaussian-splatting/Plugins/x86_64/libwebp.dll
-```
+The `libwebp` native library (Windows x64, v1.4.0) is bundled inside the plugin package — no separate download needed.
 
 ---
 

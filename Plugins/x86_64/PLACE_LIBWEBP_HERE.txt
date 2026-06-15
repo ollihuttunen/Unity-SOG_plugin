@@ -1,8 +1,0 @@
-Place libwebp.dll here.
-
-Download from:
-  https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.4.0-windows-x64.zip
-
-Extract the ZIP, then copy:
-  libwebp-1.4.0-windows-x64\lib\libwebp.dll
-to this folder (Plugins/x86_64/libwebp.dll).
