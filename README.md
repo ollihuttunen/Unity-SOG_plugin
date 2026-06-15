@@ -164,6 +164,20 @@ Unity-SOG_plugin/
 - **Editor import only** — true runtime `.sog` loading (without prior editor import) is not yet supported. `GaussianSplatAsset` requires `TextAsset` sub-assets that can only be created in the editor.
 - **Unity 2022.3+ only** — uses `ScriptedImporter` and URP Renderer Feature APIs.
 
+### Unity 2022.3 notes
+
+**DirectX 12 required.** The Gaussian Splat compute shaders use Wave Intrinsics (`wavebasic`, `waveballot`) which require DX12. Unity 2022.3 defaults to DX11, so splats will not render without this change:
+
+1. **Edit → Project Settings → Player → Other Settings → Rendering**
+2. Uncheck **Auto Graphics API**
+3. Click **+** → add **Direct3D12** and move it to the top of the list
+4. Restart Unity when prompted
+
+**Version Control package errors.** Unity 2022.3 projects that include the built-in **Version Control** (Plastic SCM) package may show `CS0006` metadata errors that prevent all scripts from compiling. If you see these errors:
+
+- Package Manager → find **Version Control** → **Remove**
+- Then delete the `Library` folder and reopen the project to force a clean reimport
+
 ### macOS note
 
 The plugin has not been tested on macOS but the C# code should work as-is. If you want to try it, you need `libwebp.dylib` instead of `libwebp.dll`. The easiest way to get it is via Homebrew:
