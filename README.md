@@ -56,14 +56,30 @@ The `libwebp` native library (Windows x64, v1.4.0) is bundled inside the plugin 
 
 ## Usage
 
-### Editor Import
+### Step 1 — Enable Gaussian Splat rendering in URP
+
+> **This is required.** Without it splats are invisible even after a successful import.
+
+1. In the **Project** window, open your URP Renderer asset — typically found at `Settings/PC_Renderer` (or `Assets/Settings/URP-Balanced-Renderer`, depending on your project template)
+2. In the **Inspector**, scroll to the bottom and click **Add Renderer Feature**
+3. Select **Gaussian Splat Renderer Feature**
+
+This is a one-time setup per project.
+
+### Step 2 — Import a .sog file
 
 1. Drag a `.sog` file into your Unity **Project** window
-2. Unity imports it automatically; this creates several files next to it:
-   - `YourFile.asset` — the `GaussianSplatAsset` (assign this to your renderer)
+2. Unity imports it automatically and creates several files next to it:
+   - `YourFile.asset` — the `GaussianSplatAsset`
    - `YourFile_pos.bytes`, `YourFile_other.bytes`, `YourFile_color.bytes`, `YourFile_sh.bytes` — binary data buffers
-3. Add a **GaussianSplatRenderer** component to a GameObject
-4. Assign the generated `.asset` to the renderer's **Asset** field
+
+### Step 3 — Add to scene
+
+1. Create an empty **GameObject** in the scene
+2. Add a **GaussianSplatRenderer** component to it
+3. Drag `YourFile.asset` into the renderer's **Asset** field
+
+The splat should now be visible in the Scene and Game views.
 
 ### Runtime (pre-imported assets)
 
@@ -137,7 +153,7 @@ Unity-SOG_plugin/
 │   └── LibWebPDecoder.cs       # Native libwebp P/Invoke wrapper
 └── Plugins/
     └── x86_64/
-        └── (place libwebp.dll here)
+        └── libwebp.dll             # bundled in release package
 ```
 
 ---
