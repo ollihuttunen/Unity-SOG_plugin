@@ -86,7 +86,7 @@ namespace GaussianSplatting.SOG.Editor
                     GaussianSplatAsset.VectorFormat.Float32,
                     GaussianSplatAsset.ColorFormat.Float32x4,
                     GaussianSplatAsset.SHFormat.Float32,
-                    boundsMin, boundsMax, null);
+                    boundsMin, boundsMax, null, null);
             }
             marker.name = baseName;
             ctx.AddObjectToAsset("GaussianSplatAsset", marker);

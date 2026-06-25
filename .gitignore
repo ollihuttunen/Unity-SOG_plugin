@@ -11,6 +11,9 @@ Plugins/x86_64/libwebp.lib
 # Documentation files (Finnish internal docs)
 SOG_Unity_Plugin_Documentation.md
 
+# Release tarballs (uploaded as GitHub release assets, not committed)
+*.tgz
+
 # OS files
 .DS_Store
 Thumbs.db

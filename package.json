@@ -1,6 +1,6 @@
 {
   "name": "com.ollihuttunen.sog-gaussian-splatting",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "SOG Gaussian Splatting",
   "description": "Adds PlayCanvas SOG (Spatially Ordered Gaussians) format support to UnityGaussianSplatting. Import and render .sog files as GaussianSplatAsset with full Float32 quality.",
   "unity": "2022.3",

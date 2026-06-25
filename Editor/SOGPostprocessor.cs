@@ -79,8 +79,8 @@ namespace GaussianSplatting.SOG.Editor
                     GaussianSplatAsset.VectorFormat.Float32,
                     GaussianSplatAsset.ColorFormat.Float32x4,
                     GaussianSplatAsset.SHFormat.Float32,
-                    rawData.boundsMin, rawData.boundsMax, null);
-                asset.SetAssetFiles(null, taPos, taOther, taColor, taSH);
+                    rawData.boundsMin, rawData.boundsMax, null, null);
+                asset.SetAssetFiles(0, null, taPos, taOther, taColor, taSH);
                 asset.name = Path.GetFileNameWithoutExtension(sogPath);
 
                 AssetDatabase.CreateAsset(asset, assetPath);

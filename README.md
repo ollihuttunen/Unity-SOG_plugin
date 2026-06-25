@@ -1,6 +1,6 @@
 # Unity SOG Plugin
 
-A Unity UPM package that adds [SOG (Spatially Ordered Gaussians)](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/) format support to [Aras Pranckevičius's UnityGaussianSplatting plugin](https://github.com/aras-p/UnityGaussianSplatting).
+A Unity UPM package that adds [SOG (Spatially Ordered Gaussians)](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/) format support to 3D Gaussian Splatting plugins for Unity.
 
 SOG is a compressed 3D Gaussian Splatting format by PlayCanvas that achieves ~15–20× smaller file sizes compared to PLY, using WebP images and vector quantization codebooks inside a ZIP archive.
 
@@ -18,22 +18,40 @@ SOG is a compressed 3D Gaussian Splatting format by PlayCanvas that achieves ~15
 
 ---
 
+## Two install options
+
+This plugin works with two different base Gaussian Splatting plugins. Choose based on your use case:
+
+| | Standard | VR |
+|---|---|---|
+| **Base plugin** | [Aras Pranckevičius's UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting) | [ninjamode's Unity-VR-Gaussian-Splatting](https://github.com/ninjamode/Unity-VR-Gaussian-Splatting) |
+| **SOG plugin version** | **v0.1.0** | **v0.1.1** |
+| **VR / stereo rendering** | No | Yes (stereo eye handling) |
+| **Quest support** | No | Yes (Quest 2 / 3 / Pro optimised) |
+| **Multi-layer splats** | No | Yes |
+| **GPU sorting** | Standard | DeviceRadixSort + AMD FidelityFX FFX |
+| **Base plugin version** | 1.1.1 (latest Aras) | 0.9.0 (NinjaMode fork) |
+
+> **Note:** The two versions use different C# APIs. v0.1.0 compiles only against Aras's plugin; v0.1.1 compiles only against NinjaMode's VR fork. The SOG file format, binary buffers, and rendering quality are identical.
+
+---
+
 ## Requirements
 
 | Dependency | Version |
 |---|---|
 | Unity | 2022.3 or newer |
-| [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting) | latest |
-| [libwebp](https://chromium.googlesource.com/webm/libwebp) native library | 1.4.0 |
+| Base Gaussian Splatting plugin | see table above |
+| [libwebp](https://chromium.googlesource.com/webm/libwebp) native library | 1.4.0 (bundled) |
 
 > **Note:** Unity's built-in `ImageConversion.LoadImage` does **not** support VP8L lossless WebP.  
-> The editor importer requires the native `libwebp.dll` (see [Installation](#installation)).
+> The editor importer requires the native `libwebp.dll` (bundled inside the package — no separate download needed).
 
 ---
 
-## Installation
+## Installation — Standard (desktop, v0.1.0)
 
-Download both `.tgz` files from the [latest release](https://github.com/ollihuttunen/Unity-SOG_plugin/releases/latest):
+Download both `.tgz` files from the [v0.1.0 release](https://github.com/ollihuttunen/Unity-SOG_plugin/releases/tag/v0.1.0):
 
 | File | Description |
 |---|---|
@@ -48,32 +66,61 @@ In Unity Package Manager → **`+`** → **Add package from tarball** → select
 
 In Unity Package Manager → **`+`** → **Add package from tarball** → select `com.ollihuttunen.sog-gaussian-splatting-0.1.0.tgz`.
 
-> **Note:** Unity will show an "unsigned package" warning for both — this is expected for packages installed from tarball outside the Unity Registry. Click **Install** to proceed.
+---
 
-The `libwebp` native library (Windows x64, v1.4.0) is bundled inside the plugin package — no separate download needed.
+## Installation — VR / Quest (v0.1.1)
+
+Download both `.tgz` files from the [latest release](https://github.com/ollihuttunen/Unity-SOG_plugin/releases/latest):
+
+| File | Description |
+|---|---|
+| `org.nesnausk.gaussian-splatting-0.9.0.tgz` | ninjamode's Unity VR Gaussian Splatting fork (MIT) |
+| `com.ollihuttunen.sog-gaussian-splatting-0.1.1.tgz` | This plugin (VR-compatible build) |
+
+### Step 1 — Install NinjaMode's VR fork
+
+In Unity Package Manager → **`+`** → **Add package from tarball** → select `org.nesnausk.gaussian-splatting-0.9.0.tgz`.
+
+### Step 2 — Install this plugin
+
+In Unity Package Manager → **`+`** → **Add package from tarball** → select `com.ollihuttunen.sog-gaussian-splatting-0.1.1.tgz`.
+
+### Step 3 — Install XR packages (VR only)
+
+For actual VR rendering, also install:
+- **XR Plugin Management** (Unity Registry)
+- **OpenXR Plugin** or **Oculus XR Plugin** (depending on your headset)
+
+> **Note:** SOG import and desktop preview work without XR packages. You only need them for actual VR headset output.
 
 ---
 
-## Usage
+## Common setup (both versions)
 
-### Step 1 — Enable Gaussian Splat rendering in URP
+> **Unity will show an "unsigned package" warning for tarball installs — this is expected. Click Install to proceed.**
+
+### Enable Gaussian Splat rendering in URP
 
 > **This is required.** Without it splats are invisible even after a successful import.
 
-1. In the **Project** window, open your URP Renderer asset — typically found at `Settings/PC_Renderer` (or `Assets/Settings/URP-Balanced-Renderer`, depending on your project template)
+1. In the **Project** window, open your URP Renderer asset — typically at `Settings/PC_Renderer` or `Assets/Settings/URP-Balanced-Renderer`
 2. In the **Inspector**, scroll to the bottom and click **Add Renderer Feature**
 3. Select **Gaussian Splat Renderer Feature**
 
 This is a one-time setup per project.
 
-### Step 2 — Import a .sog file
+---
+
+## Usage
+
+### Step 1 — Import a .sog file
 
 1. Drag a `.sog` file into your Unity **Project** window
 2. Unity imports it automatically and creates several files next to it:
    - `YourFile.asset` — the `GaussianSplatAsset`
-   - `YourFile_pos.bytes`, `YourFile_other.bytes`, `YourFile_color.bytes`, `YourFile_sh.bytes` — binary data buffers
+   - `YourFile_pos.bytes`, `YourFile_oth.bytes`, `YourFile_col.bytes`, `YourFile_shs.bytes` — binary data buffers
 
-### Step 3 — Add to scene
+### Step 2 — Add to scene
 
 1. Create an empty **GameObject** in the scene
 2. Add a **GaussianSplatRenderer** component to it
@@ -163,6 +210,7 @@ Unity-SOG_plugin/
 - **Windows x64 only (primary target)** — the libwebp native plugin is configured for Windows x64. The C# code itself is fully cross-platform; only the native library needs to be swapped for other platforms.
 - **Editor import only** — true runtime `.sog` loading (without prior editor import) is not yet supported. `GaussianSplatAsset` requires `TextAsset` sub-assets that can only be created in the editor.
 - **Unity 2022.3+ only** — uses `ScriptedImporter` and URP Renderer Feature APIs.
+- **VR version based on NinjaMode fork v0.9.0** — the VR fork is not synced with the latest Aras upstream (v1.1.1). Future upstream improvements may not be reflected.
 
 ### Unity 2022.3 notes
 
@@ -202,7 +250,7 @@ The import pipeline:
        └─ SOGParser → SOGRawData
             └─ SOGConverter → binary buffers (.bytes files)
                  └─ SOGPostprocessor → GaussianSplatAsset (.asset)
-                      └─ GaussianSplatRenderer (Aras's plugin renders it)
+                      └─ GaussianSplatRenderer (base plugin renders it)
 ```
 
 1. `SOGParser` opens the ZIP, reads `meta.json`, decodes each WebP image using the native libwebp library, and produces `SOGRawData` with per-splat positions, rotations, scales, colors, and SH coefficients.
@@ -219,6 +267,7 @@ MIT License — see [LICENSE](LICENSE) file.
 
 ## Acknowledgements
 
-- [Aras Pranckevičius](https://github.com/aras-p) for the [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting) plugin
+- [Aras Pranckevičius](https://github.com/aras-p) for the [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting) plugin — the rendering core and binary format that this plugin targets
+- [ninjamode](https://github.com/ninjamode) for the [Unity-VR-Gaussian-Splatting](https://github.com/ninjamode/Unity-VR-Gaussian-Splatting) fork — adds stereo VR rendering, Quest optimisations, multi-layer splat support, and improved GPU sorting (DeviceRadixSort / AMD FidelityFX FFX); published in [IEEE TVCG 2025](https://doi.org/10.1109/TVCG.2025.3549110)
 - [PlayCanvas](https://playcanvas.com) for the [SOG format specification](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/) and [splat-transform](https://github.com/playcanvas/splat-transform) reference implementation
 - [Google WebM Project](https://www.webmproject.org) for libwebp
